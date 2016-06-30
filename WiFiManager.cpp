@@ -170,6 +170,10 @@ boolean  WiFiManager::startConfigPortal(char const *apName, char const *apPasswo
     dnsServer->processNextRequest();
     //HTTP
     server->handleClient();
+    //Allow functions to process while we're waiting for AP mode to get a network
+    if ( _aploopcallback != NULL) {
+      _aploopcallback(this);
+    }
 
 
     if (connect) {
@@ -695,6 +699,11 @@ boolean WiFiManager::captivePortal() {
 //start up config portal callback
 void WiFiManager::setAPCallback( void (*func)(WiFiManager* myWiFiManager) ) {
   _apcallback = func;
+}
+
+//looping config portal callback
+void WiFiManager::setAPLoopCallback( void (*func)(WiFiManager* myWiFiManager) ) {
+  _aploopcallback = func;
 }
 
 //start up save config callback

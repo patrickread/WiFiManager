@@ -96,6 +96,8 @@ class WiFiManager
     void          setSTAStaticIPConfig(IPAddress ip, IPAddress gw, IPAddress sn);
     //called when AP mode and config portal is started
     void          setAPCallback( void (*func)(WiFiManager*) );
+    //called while AP mode and config portal is waiting for connections (ongiong)
+    void          setAPLoopCallback( void (*func)(WiFiManager*) );
     //called when settings have been changed and connection was successful
     void          setSaveConfigCallback( void (*func)(void) );
     //adds a custom parameter
@@ -172,6 +174,7 @@ class WiFiManager
     boolean       _debug = true;
 
     void (*_apcallback)(WiFiManager*) = NULL;
+    void (*_aploopcallback)(WiFiManager*) = NULL;
     void (*_savecallback)(void) = NULL;
 
     WiFiManagerParameter* _params[WIFI_MANAGER_MAX_PARAMS];
