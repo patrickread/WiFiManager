@@ -574,16 +574,7 @@ void WiFiManager::handleWifiSave() {
     optionalIPFromString(&_sta_static_sn, sn.c_str());
   }
 
-  String page = FPSTR(HTTP_HEAD);
-  page.replace("{v}", "Credentials Saved");
-  page += FPSTR(HTTP_SCRIPT);
-  page += FPSTR(HTTP_STYLE);
-  page += _customHeadElement;
-  page += FPSTR(HTTP_HEAD_END);
-  page += FPSTR(HTTP_SAVED);
-  page += FPSTR(HTTP_END);
-
-  server->send(200, "text/html", page);
+  server->send(200, "text/json", "{ \"result\": \"attempting_connection\" }");
 
   DEBUG_WM(F("Sent wifi save page"));
 
