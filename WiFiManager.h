@@ -110,6 +110,8 @@ class WiFiManager
     void          setCustomHeadElement(const char* element);
     //if this is true, remove duplicated Access Points - defaut true
     void          setRemoveDuplicateAPs(boolean removeDuplicates);
+    String        getSSID();
+    String        getPassword();
 
   private:
     std::unique_ptr<DNSServer>        dnsServer;
